@@ -432,7 +432,7 @@ int main() {
                             send_400(client);
                         } 
                        else if (strncmp("POST /", client->request, 6) == 0){
-                            fwrite(client->request,1,sizeof(client->request),stdout);
+                            //fwrite(client->request,1,sizeof(client->request),stdout);
                             char *filename = strstr(client->request, "filename=");
                             //fwrite(filename,1,MAX_REQUEST_SIZE,stdout);
                             uploadfile(client);
