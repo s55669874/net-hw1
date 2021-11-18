@@ -238,7 +238,7 @@ void serve_resource(struct client_info *client, const char *path) {
 
     const char *ct = get_content_type(full_path);
 
-#define BSIZE 1024
+#define BSIZE 8196
     char buffer[BSIZE];
 
     sprintf(buffer, "HTTP/1.1 200 OK\r\n");
@@ -266,7 +266,7 @@ void serve_resource(struct client_info *client, const char *path) {
     drop_client(client);
 }
 
-#define buffersize 8192
+#define buffersize 100000
 
 void upload_resorce(struct client_info *client,const char *path){
     printf("upload_resource %s %s\n", get_client_address(client), path);
@@ -341,7 +341,7 @@ void uploadfile(struct client_info *client){
 
     long long int i = 4;
 
-    while (i < 70000 + 4)
+    while (i < 700000 + 4)
     {
         if (!strncmp(&content[i], edge2, strlen(edge2)))
             {
@@ -415,6 +415,9 @@ int main() {
                 int r = recv(client->socket,
                         client->request + client->received,
                         MAX_REQUEST_SIZE - client->received, 0);
+                char *ptr = client -> request;
+                for(int i = 0 ; i < r ; i ++)
+                	printf("%x\n", *(ptr+1));
 
                 if (r < 1) {
                     printf("Unexpected disconnect from %s.\n",
@@ -473,4 +476,3 @@ int main() {
     printf("Finished.\n");
     return 0;
 }
-
