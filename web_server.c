@@ -341,7 +341,7 @@ void uploadfile(struct client_info *client){
 
     long long int i = 4;
 
-    while (i < 50000 + 4)
+    while (i < 70000 + 4)
     {
         if (!strncmp(&content[i], edge2, strlen(edge2)))
             {
